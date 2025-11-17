@@ -20,6 +20,8 @@ func (h *APIHandler) RegisterRoutes(router *mux.Router, jwtSecret string) {
 	router.HandleFunc("/register", h.RegisterHandler).Methods("POST")
 	router.HandleFunc("/login", h.LoginHandler).Methods("POST")
 
+	router.HandleFunc("/test-graphql/{code}", h.GetCountryHandler).Methods("GET")
+
 	// Protected routes (Products)
 	// We apply middleware in order: Auth (to get user) -> RBAC (to check perm)
 	productRouter := router.PathPrefix("/products").Subrouter()

@@ -41,9 +41,10 @@ func main() {
 	authSvc := service.NewAuthService(userRepo, roleRepo, cfg.JWTSecret, cfg.JWTExpirationInHours)
 	rbacSvc := service.NewRBACService(userRepo)
 	productSvc := service.NewProductService(productRepo)
+	graphqlSvc := service.NewGraphQLService()
 
 	// API/Handler Layer
-	apiHandler := api.NewAPIHandler(authSvc, rbacSvc, productSvc)
+	apiHandler := api.NewAPIHandler(authSvc, rbacSvc, productSvc, graphqlSvc)
 
 	// --- 4. Setup Router & Routes ---
 	router := mux.NewRouter()

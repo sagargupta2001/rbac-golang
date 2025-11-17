@@ -12,14 +12,21 @@ type APIHandler struct {
 	authSvc    service.AuthService
 	rbacSvc    service.RBACService
 	productSvc service.ProductService
+	graphqlSvc service.GraphQLService
 }
 
 // NewAPIHandler creates a new APIHandler with all its dependencies
-func NewAPIHandler(authSvc service.AuthService, rbacSvc service.RBACService, productSvc service.ProductService) *APIHandler {
+func NewAPIHandler(
+	authSvc service.AuthService,
+	rbacSvc service.RBACService,
+	productSvc service.ProductService,
+	graphqlSvc service.GraphQLService,
+) *APIHandler {
 	return &APIHandler{
 		authSvc:    authSvc,
 		rbacSvc:    rbacSvc,
 		productSvc: productSvc,
+		graphqlSvc: graphqlSvc,
 	}
 }
 
@@ -47,7 +54,6 @@ func (h *APIHandler) CreateProductHandler(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-    // This is the line that returns the JSON body
 	respondWithJSON(w, http.StatusCreated, product)
 }
 

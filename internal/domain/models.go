@@ -57,3 +57,32 @@ type CreateProductRequest struct {
 	Name  string  `json:"name"`
 	Price float64 `json:"price"`
 }
+
+// --- GraphQL Client Structs ---
+
+// GraphQLRequest represents the JSON body we send in a POST request
+type GraphQLRequest struct {
+	Query     string                 `json:"query"`
+	Variables map[string]interface{} `json:"variables"`
+}
+
+// GraphQLCountryResponse is the struct we will unmarshal the JSON response into.
+// The struct tags (e.g., `json:"data"`) MUST match the JSON response.
+type GraphQLCountryResponse struct {
+	Data struct {
+		Country struct {
+			Name    string `json:"name"`
+			Capital string `json:"capital"`
+			Emoji   string `json:"emoji"`
+			Currency  string            `json:"currency"`
+		} `json:"country"`
+	} `json:"data"`
+}
+
+// CountryDetails is a cleaner struct we'll return from our API
+type CountryDetails struct {
+	Name    string `json:"name"`
+	Capital string `json:"capital"`
+	Emoji   string `json:"emoji"`
+	Currency  string            `json:"currency"`
+}
